@@ -1,0 +1,117 @@
+{
+    "info": {
+        "name": "MERN Todo App",
+        "description": "Postman collection to test the Todo App API with role-based access control.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Auth - Register",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": "http://localhost:5000/api/auth/register",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ \"name\": \"Test User\", \"email\": \"test@example.com\", \"password\": \"123456\", \"role\": \"user\" }"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Auth - Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": "http://localhost:5000/api/auth/login",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ \"email\": \"test@example.com\", \"password\": \"123456\" }"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todos - Create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{TOKEN}}"
+                    }
+                ],
+                "url": "http://localhost:5000/api/todos",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ \"title\": \"New Todo\", \"description\": \"Test todo item\" }"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todos - Get All",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{TOKEN}}"
+                    }
+                ],
+                "url": "http://localhost:5000/api/todos"
+            },
+            "response": []
+        },
+        {
+            "name": "Todos - Update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{TOKEN}}"
+                    }
+                ],
+                "url": "http://localhost:5000/api/todos/{{TODO_ID}}",
+                "body": {
+                    "mode": "raw",
+                    "raw": "{ \"title\": \"Updated Todo\", \"completed\": true }"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Todos - Delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{TOKEN}}"
+                    }
+                ],
+                "url": "http://localhost:5000/api/todos/{{TODO_ID}}"
+            },
+            "response": []
+        }
+    ]
+}
